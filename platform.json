@@ -1,0 +1,41 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sn0w12/stream-recorder-rs/refs/heads/main/platforms/schema.json",
+    "id": "chaturbate",
+    "name": "Chaturbate",
+    "version": "1.0.0",
+    "stream_recorder_version": "^0.1.2",
+    "title_clean_regex": [
+        "#\\S+",
+        "\\[.*?\\]",
+        {
+            "pattern": " {2,}",
+            "replacement": " "
+        }
+    ],
+    "base_url": "https://chaturbate.com/api/",
+    "headers": {
+        "Accept": "application/json",
+        "origin": "https://chaturbate.com",
+        "referer": "https://chaturbate.com/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+    },
+    "steps": [
+        {
+            "endpoint": "biocontext/{username}/",
+            "live_check": {
+                "path": "room_status",
+                "equals": "public"
+            },
+            "extract": {
+                "avatar_url": "photo_sets[0].cover_url"
+            }
+        },
+        {
+            "endpoint": "chatvideocontext/{username}/",
+            "extract": {
+                "stream_title": "room_title",
+                "playback_url": "hls_source"
+            }
+        }
+    ]
+}
