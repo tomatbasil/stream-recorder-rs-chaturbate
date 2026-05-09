@@ -3,7 +3,7 @@
     "id": "chaturbate",
     "name": "Chaturbate",
     "version": "1.0.0",
-    "stream_recorder_version": "^0.1.2",
+    "stream_recorder_version": ">=0.1.2",
     "title_clean_regex": [
         "#\\S+",
         "\\[.*?\\]",
